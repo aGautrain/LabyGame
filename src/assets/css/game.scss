@@ -1,0 +1,9 @@
+$color-main: #444741;
+$color-text: white;
+$font-main: "Oswald", sans-serif;
+
+body {
+  color: $color-text;
+  background-color: $color-main;
+  font-family: $font-main;
+}
