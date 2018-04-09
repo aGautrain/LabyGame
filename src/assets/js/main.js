@@ -8,7 +8,7 @@ const lukeSprite = document.getElementById('lukeSprite');
 let mainChar = new Luke_class_1.HeroLuke(2, 2, lukeSprite);
 // Initializing Map
 const canvas = document.getElementById('mainScene');
-const map = new Map_class_1.Map(canvas, 10, 10);
+const map = new Map_class_1.Map(canvas, 10, 10, mainChar);
 map.append(mainChar);
 document.addEventListener('keyup', function (e) {
     switch (e.keyCode) {

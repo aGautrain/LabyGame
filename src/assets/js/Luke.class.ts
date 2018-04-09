@@ -12,6 +12,7 @@ export class HeroLuke extends HeroEntity {
       75,
       3,
       1000,
+      4,
       sprite
     );
   }

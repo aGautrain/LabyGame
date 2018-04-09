@@ -11,7 +11,7 @@ let mainChar: HeroEntity = new HeroLuke(2, 2, lukeSprite);
 
 // Initializing Map
 const canvas: HTMLCanvasElement = <HTMLCanvasElement>document.getElementById('mainScene');
-const map: Map = new Map(canvas, 10, 10);
+const map: Map = new Map(canvas, 10, 10, mainChar);
 map.append(mainChar);
 
 document.addEventListener('keyup', function(e) {

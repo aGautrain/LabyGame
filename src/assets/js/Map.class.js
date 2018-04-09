@@ -1,10 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 class Map {
-    constructor(canvas, w, h) {
+    constructor(canvas, w, h, own) {
         Map.width = w;
         Map.height = h;
         Map.cellSelected = null;
+        Map.owner = own;
         this.entities = new Array(0);
         this.canvas = canvas;
     }
@@ -29,9 +30,14 @@ class Map {
             for (let j = 0; j < Map.width; j++) {
                 ((j + i) % 2) === 0 ? pencil.fillStyle = "#e6f3ff" : pencil.fillStyle = "#cccccc";
                 pencil.fillRect(j * widthPxPerCell, i * heightPxPerCell, widthPxPerCell, heightPxPerCell);
+                if (Math.sqrt((Map.owner.getX() - j) * (Map.owner.getX() - j) + (Map.owner.getY() - i) * (Map.owner.getY() - i)) > Map.owner.getViewDistance()) {
+                    pencil.fillStyle = "rgba(100,100,100, 0.8)";
+                    pencil.fillRect(j * widthPxPerCell, i * heightPxPerCell, widthPxPerCell, heightPxPerCell);
+                }
             }
         }
         for (let k = 0; k < this.entities.length; k++) {
+            // check entity euclidean distance relative to the map owner
             pencil.drawImage(this.entities[k].getSprite(), this.entities[k].getX() * widthPxPerCell, this.entities[k].getY() * heightPxPerCell, widthPxPerCell, heightPxPerCell);
             this.entities[k].paintUI(pencil, this.entities[k].getX() * widthPxPerCell, this.entities[k].getY() * heightPxPerCell, widthPxPerCell, heightPxPerCell);
         }

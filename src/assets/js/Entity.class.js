@@ -46,13 +46,14 @@ class Entity {
 }
 exports.Entity = Entity;
 class LiveEntity extends Entity {
-    constructor(x, y, name, hp, movemax, movespeed, sprite) {
+    constructor(x, y, name, hp, movemax, movespeed, view, sprite) {
         super(x, y, name, sprite);
         this.hp = hp;
         this.moveSpeedMs = movespeed;
         this.lastMove = 0;
         this.moveCharges = movemax;
         this.moveChargesMax = movemax;
+        this.viewDistance = view;
     }
     canDie() {
         return true;
@@ -73,6 +74,9 @@ class LiveEntity extends Entity {
     getMissingCharges() {
         return this.moveChargesMax - this.moveCharges;
     }
+    getViewDistance() {
+        return this.viewDistance;
+    }
     paintUI(pencil, x, y, width, height) {
         pencil.fillStyle = "#996633";
         pencil.beginPath();
@@ -87,8 +91,8 @@ class LiveEntity extends Entity {
 }
 exports.LiveEntity = LiveEntity;
 class HeroEntity extends LiveEntity {
-    constructor(x, y, name, passive, hp, movemax, movespeed, sprite) {
-        super(x, y, name, hp, movemax, movespeed, sprite);
+    constructor(x, y, name, passive, hp, movemax, movespeed, view, sprite) {
+        super(x, y, name, hp, movemax, movespeed, view, sprite);
         this.type = EntityType.Hero;
         this.passiveDescription = passive;
     }

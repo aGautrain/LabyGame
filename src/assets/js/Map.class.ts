@@ -1,4 +1,4 @@
-import { Entity, Coords } from './Entity.class';
+import { Entity, Coords, HeroEntity } from './Entity.class';
 
 export class Map {
   entities: Array<Entity>;
@@ -7,11 +7,14 @@ export class Map {
 
   static cellSelected: Coords;
 
+  static owner: HeroEntity;
+
   canvas: HTMLCanvasElement;
-  constructor(canvas: HTMLCanvasElement, w: number, h: number){
+  constructor(canvas: HTMLCanvasElement, w: number, h: number, own: HeroEntity){
     Map.width = w;
     Map.height = h;
     Map.cellSelected = null;
+    Map.owner = own;
     this.entities = new Array<Entity>(0);
     this.canvas = canvas;
   }
@@ -40,11 +43,18 @@ export class Map {
     for(let i: number = 0; i < Map.height; i++){
       for(let j: number = 0; j < Map.width; j++){
         ((j+i) % 2) === 0 ? pencil.fillStyle = "#e6f3ff" : pencil.fillStyle = "#cccccc";
+
         pencil.fillRect(j*widthPxPerCell, i*heightPxPerCell, widthPxPerCell, heightPxPerCell);
+
+        if(Math.sqrt((Map.owner.getX() - j)*(Map.owner.getX() - j) + (Map.owner.getY() - i)*(Map.owner.getY() - i)) > Map.owner.getViewDistance()) {
+          pencil.fillStyle = "rgba(100,100,100, 0.8)";
+          pencil.fillRect(j*widthPxPerCell, i*heightPxPerCell, widthPxPerCell, heightPxPerCell);
+        }
       }
     }
 
     for(let k: number = 0; k < this.entities.length; k++){
+      // check entity euclidean distance relative to the map owner
       pencil.drawImage(this.entities[k].getSprite(), this.entities[k].getX()*widthPxPerCell, this.entities[k].getY()*heightPxPerCell, widthPxPerCell, heightPxPerCell);
       this.entities[k].paintUI(pencil, this.entities[k].getX()*widthPxPerCell, this.entities[k].getY()*heightPxPerCell, widthPxPerCell, heightPxPerCell);
     }

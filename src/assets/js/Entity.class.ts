@@ -67,14 +67,16 @@ export class LiveEntity extends Entity {
   protected lastMove: number;
   protected moveCharges: number;
   protected moveChargesMax: number;
+  protected viewDistance: number;
 
-  constructor(x: number, y: number, name: string, hp: number, movemax: number, movespeed: number, sprite: HTMLImageElement) {
+  constructor(x: number, y: number, name: string, hp: number, movemax: number, movespeed: number, view: number, sprite: HTMLImageElement) {
     super(x, y, name, sprite);
     this.hp = hp;
     this.moveSpeedMs = movespeed;
     this.lastMove = 0;
     this.moveCharges = movemax;
     this.moveChargesMax = movemax;
+    this.viewDistance = view;
   }
 
   canDie(): boolean {
@@ -100,6 +102,10 @@ export class LiveEntity extends Entity {
     return this.moveChargesMax - this.moveCharges;
   }
 
+  getViewDistance(): number {
+    return this.viewDistance;
+  }
+
   paintUI(pencil: CanvasRenderingContext2D, x: number, y: number, width: number, height: number): void {
     pencil.fillStyle = "#996633";
     pencil.beginPath();
@@ -119,8 +125,8 @@ export class HeroEntity extends LiveEntity {
 
   passiveDescription: string;
 
-  constructor(x: number, y: number, name: string, passive: string, hp: number, movemax: number, movespeed: number, sprite: HTMLImageElement){
-    super(x, y, name, hp, movemax, movespeed, sprite);
+  constructor(x: number, y: number, name: string, passive: string, hp: number, movemax: number, movespeed: number, view: number, sprite: HTMLImageElement){
+    super(x, y, name, hp, movemax, movespeed, view, sprite);
     this.type = EntityType.Hero;
     this.passiveDescription = passive;
   }
