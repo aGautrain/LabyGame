@@ -2,19 +2,28 @@
   <head>
     <title>Game prototype</title>
     <meta charset="utf-8">
-    <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Oswald|Do+Hyeon" rel="stylesheet">
 
+    <script src="../assets/js/vue.min.js"></script>
     <link rel="stylesheet" href="../assets/css/game.css">
-
-    <script type="text/javascript" src="../assets/js/bundle.main.js"></script>
   </head>
   <body>
 
-    <h1>Game prototype</h1>
-    <p>Base project implementing canvas example</p>
+    <h1>LabyGame</h1>
+    <p>Find your way in this escape game while trying to kill your ennemies with some cool traps</p>
 
-    <canvas id="mainScene"></canvas>
-    <canvas id="backgroundScene"></canvas>
+    <canvas id="mainScene" width="600" height="600"></canvas>
 
+    <div id="charSheet">
+      <h3 class="char-name">{{name}}</h3>
+      <img src="../assets/imgs/luke.png" alt="" title="" id="lukeSprite" class="char-sprite" />
+      <ul class="char-stats">
+        <li class="char-stats-hp"><span>{{hp}}</span> <img src="../assets/imgs/hp.png" alt="" title="" class="char-stats-hp--thumbnail"></h3>
+        <li class="char-stats-moves"><span class="stat-value">{{moveCharges}}<span><br/><span v-if="moveCharges > 1">MOVES </span><span v-else>MOVE </span>LEFT</li><br/>
+        <li class="char-stats-passive">{{passiveDescription}}</li>
+      </ul>
+    </div>
+
+    <script type="text/javascript" src="../assets/js/bundle.main.js"></script>
   </body>
 </html>

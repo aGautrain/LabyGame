@@ -1,9 +1,77 @@
 $color-main: #444741;
 $color-text: white;
 $font-main: "Oswald", sans-serif;
+$font-aux: "Do Hyeon", sans-serif;
 
 body {
   color: $color-text;
   background-color: $color-main;
   font-family: $font-main;
+  text-align: center;
+  overflow: hidden;
+}
+
+
+#mainScene {
+  
+}
+
+#charSheet {
+  position: absolute;
+  top: 100px;
+  right: 100px;
+  background-color: white;
+  color: black;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border: solid black 5px;
+  font-family: $font-aux;
+
+  .char-sprite {
+    margin: 20px;
+    border-bottom: solid black 5px;
+  }
+
+  .char-name {
+    display: block;
+    background-color: black;
+    color: white;
+    padding: 20px;
+    margin: 0px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .char-stats {
+    padding: 0px;
+    margin: 0px;
+    width: 400px;
+
+    li {
+      position: relative;
+      display: inline-block;
+      padding: 0px 20px;
+      font-size: 24px;
+      width: 150px;
+    }
+
+    .char-stats-passive {
+      width: 100%;
+      padding: 20px 0px;
+      margin-top: 20px;
+      border-top: solid black 5px;
+    }
+
+    .char-stats-hp {
+      vertical-align: baseline;
+    }
+
+    .char-stats-hp--thumbnail {
+      position: relative;
+      top: 8px;
+      width: 32px;
+      height: 32px;
+    }
+  }
+
 }

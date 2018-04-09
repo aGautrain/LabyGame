@@ -38,7 +38,6 @@ gulp.task('ts', 'Transpile .ts into .js', function (cb) {
     gulp.src('./src/assets/js/*.ts'),
 	  debug({title: 'tsInput:', showFiles: false}),
     ts({
-      noImplicitAny: true,
       module: 'commonjs',
       target: 'es6'
     }),
